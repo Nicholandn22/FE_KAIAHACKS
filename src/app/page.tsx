@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 
 interface Particle {
   x: number;
@@ -44,8 +44,26 @@ export default function HomePage() {
 
   return (
     <div className="relative text-white scroll-smooth overflow-hidden">
-      {/* 🌌 Background Particles */}
-      <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none">
+      {/* 🌌 Smooth Moving Gradient Background */}
+      <motion.div
+        className="fixed inset-0 z-0"
+        style={{
+          background:
+            "linear-gradient(120deg, #0f0c29, #302b63, #24243e, #1a1a40, #3a0ca3, #7209b7, #f72585)",
+          backgroundSize: "600% 600%",
+        }}
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          duration: 30,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      />
+
+      {/* 🌌 Particles Layer */}
+      <div className="fixed inset-0 overflow-hidden z-10 pointer-events-none">
         {particles.map((p, i) => (
           <motion.div
             key={i}
@@ -53,7 +71,8 @@ export default function HomePage() {
             style={{
               width: `${Math.random() * 6 + 3}px`,
               height: `${Math.random() * 6 + 3}px`,
-              background: `radial-gradient(circle, rgba(236,72,153,0.8), rgba(168,85,247,0.3))`,
+              background:
+                "radial-gradient(circle, rgba(236,72,153,0.8), rgba(168,85,247,0.3))",
               filter: "blur(2px)",
             }}
             initial={{ x: p.x, y: p.y, opacity: 0 }}
@@ -85,274 +104,422 @@ export default function HomePage() {
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       />
+      <main className="pt-24">
+        {/* Section 1 - Hero */}
+        <section className="relative z-20 h-screen flex flex-col justify-center px-10 md:px-32 pt-24">
+          <header
+            className="fixed top-0 left-0 w-full flex justify-between items-center px-10 py-6 
+    z-[9999] bg-gradient-to-r from-purple-900 via-black to-pink-900 shadow-lg"
+          >
+            <h1 className="text-2xl font-extrabold text-purple-400">
+              WEB3 BRAND
+            </h1>
+            <nav className="hidden md:flex gap-8 text-gray-300 font-medium">
+              <a href="#" className="hover:text-white transition">
+                Solutions & Services
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Platform
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Pricing
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Resources
+              </a>
+              <a href="#" className="hover:text-white transition">
+                Why Us
+              </a>
+            </nav>
+            <div className="flex gap-4">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-gray-300 hover:text-white transition"
+              >
+                Sign in
+              </motion.button>
+              <Link href="/login">
+                <motion.button
+                  whileHover={{ scale: 1.1, boxShadow: "0 0 20px #a855f7" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-purple-500 text-white font-bold px-5 py-2 rounded-full hover:bg-purple-400 transition"
+                >
+                  Login
+                </motion.button>
+              </Link>
+            </div>
+          </header>
 
-      {/* Section 1 - Hero */}
-      <section className="relative z-10 h-screen flex flex-col justify-center px-10 md:px-32 bg-gradient-to-b from-gray-900 via-purple-900 to-black">
-        <header className="fixed top-0 left-0 w-full flex justify-between items-center px-10 py-6 z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-md">
-          <h1 className="text-2xl font-extrabold text-purple-400">
-            WEB3 BRAND
-          </h1>
-          <nav className="hidden md:flex gap-8 text-gray-300 font-medium">
-            <a href="#" className="hover:text-white transition">
-              Solutions & Services
-            </a>
-            <a href="#" className="hover:text-white transition">
-              Platform
-            </a>
-            <a href="#" className="hover:text-white transition">
-              Pricing
-            </a>
-            <a href="#" className="hover:text-white transition">
-              Resources
-            </a>
-            <a href="#" className="hover:text-white transition">
-              Why Us
-            </a>
-          </nav>
-          <div className="flex gap-4">
-            <motion.button
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h1
+              className="text-5xl md:text-7xl font-extrabold uppercase leading-tight max-w-4xl 
+      bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+            >
+              Build Brand <br /> Experiences That Last
+            </h1>
+            <p className="text-lg text-gray-300 mt-6 max-w-xl">
+              From identity design to branded assets, we translate your existing
+              Web3 strategy into cohesive visual systems.
+            </p>
+
+            <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-gray-300 hover:text-white transition"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById("swap-section");
+                if (target) {
+                  setTimeout(() => {
+                    target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }, 300);
+                }
+              }}
+              className="inline-block mt-8 bg-pink-500 text-white font-bold px-6 py-3 rounded-full text-lg hover:bg-pink-400 transition cursor-pointer"
             >
-              Sign in
-            </motion.button>
-            {/* Tombol Login */}
-            <Link href="/login">
+              Get Started
+            </motion.a>
+          </motion.div>
+        </section>
+
+        {/* Section 2 - Transfer/Swap */}
+        <section
+          id="swap-section"
+          className="relative z-20 h-screen flex flex-col justify-center items-center px-6 md:px-20"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-wrap gap-4 mb-6 text-sm text-gray-400">
+                <span>⭐ 4.9/5 rating 10k+ users</span>
+                <span>⚡ Fast and Secure</span>
+              </div>
+
+              <h2 className="text-4xl md:text-6xl font-extrabold text-pink-400 uppercase">
+                Secure Web3 Transfers
+              </h2>
+              <p className="mt-4 text-lg text-gray-300">
+                Join thousands of people sending crypto globally — with gas fees
+                as low as{" "}
+                <span className="text-pink-400 font-semibold">0.1%</span>.
+              </p>
+
+              <ul className="mt-6 space-y-3 text-gray-300">
+                <li>
+                  💸 <b>Low fees</b> — cheaper the more you swap
+                </li>
+                <li>
+                  ⚡ <b>Lightning fast</b> — transactions in seconds
+                </li>
+                <li>
+                  🔒 <b>Predictable</b> — lock in exchange rate
+                </li>
+              </ul>
+
               <motion.button
                 whileHover={{ scale: 1.1, boxShadow: "0 0 20px #a855f7" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-purple-500 text-white font-bold px-5 py-2 rounded-full hover:bg-purple-400 transition"
+                className="mt-8 bg-purple-600 hover:bg-purple-500 px-6 py-3 rounded-full font-bold text-white"
               >
-                Login
+                Open an account
               </motion.button>
-            </Link>
-          </div>
-        </header>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-extrabold uppercase leading-tight max-w-4xl bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-            Build Brand <br /> Experiences That Last
-          </h1>
-          <p className="text-lg text-gray-300 mt-6 max-w-xl">
-            From identity design to branded assets, we translate your existing
-            Web3 strategy into cohesive visual systems.
-          </p>
-
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={(e) => {
-              e.preventDefault();
-              const target = document.getElementById("swap-section");
-              if (target) {
-                setTimeout(() => {
-                  target.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 300);
-              }
-            }}
-            className="inline-block mt-8 bg-pink-500 text-white font-bold px-6 py-3 rounded-full text-lg hover:bg-pink-400 transition cursor-pointer"
-          >
-            Get Started
-          </motion.a>
-        </motion.div>
-      </section>
-
-      {/* Section 2 - Transfer/Swap */}
-      <section
-        id="swap-section"
-        className="relative z-10 h-screen flex flex-col justify-center items-center px-6 md:px-20 bg-gradient-to-b from-black via-purple-950 to-gray-900"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex flex-wrap gap-4 mb-6 text-sm text-gray-400">
-              <span>⭐ 4.9/5 rating 10k+ users</span>
-              <span>⚡ Fast and Secure</span>
-            </div>
-
-            <h2 className="text-4xl md:text-6xl font-extrabold text-pink-400 uppercase">
-              Secure Web3 Transfers
-            </h2>
-            <p className="mt-4 text-lg text-gray-300">
-              Join thousands of people sending crypto globally — with gas fees
-              as low as{" "}
-              <span className="text-pink-400 font-semibold">0.1%</span>.
-            </p>
-
-            <ul className="mt-6 space-y-3 text-gray-300">
-              <li>
-                💸 <b>Low fees</b> — cheaper the more you swap
-              </li>
-              <li>
-                ⚡ <b>Lightning fast</b> — transactions in seconds
-              </li>
-              <li>
-                🔒 <b>Predictable</b> — lock in exchange rate
-              </li>
-            </ul>
-
-            <motion.button
-              whileHover={{ scale: 1.1, boxShadow: "0 0 20px #a855f7" }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-8 bg-purple-600 hover:bg-purple-500 px-6 py-3 rounded-full font-bold text-white"
+            {/* Right Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 0 30px rgba(236, 72, 153, 0.6)",
+              }}
+              className="bg-white text-gray-900 rounded-2xl shadow-2xl p-10 w-full max-w-lg transition"
             >
-              Open an account
-            </motion.button>
-          </motion.div>
+              <h3 className="text-xl font-bold mb-6">Swap Tokens</h3>
 
-          {/* Right Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 0 30px rgba(236, 72, 153, 0.6)",
-            }}
-            className="bg-white text-gray-900 rounded-2xl shadow-2xl p-10 w-full max-w-lg transition"
-          >
-            <h3 className="text-xl font-bold mb-6">Swap Tokens</h3>
+              <div className="mb-6">
+                <label className="block text-sm font-medium mb-2">
+                  You Send
+                </label>
+                <input
+                  type="number"
+                  placeholder="500 USDC"
+                  className="w-full p-4 border rounded-lg text-lg focus:ring-2 focus:ring-pink-400 outline-none"
+                />
+              </div>
 
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">You Send</label>
-              <input
-                type="number"
-                placeholder="500 USDC"
-                className="w-full p-4 border rounded-lg text-lg focus:ring-2 focus:ring-pink-400 outline-none"
-              />
-            </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium mb-2">
+                  You Receive
+                </label>
+                <input
+                  type="number"
+                  placeholder="IDRX Amount"
+                  className="w-full p-4 border rounded-lg text-lg focus:ring-2 focus:ring-purple-400 outline-none"
+                />
+              </div>
 
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">
-                You Receive
-              </label>
-              <input
-                type="number"
-                placeholder="IDRX Amount"
-                className="w-full p-4 border rounded-lg text-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              />
-            </div>
+              <p className="text-sm text-gray-500 mb-6">
+                Estimated fee: <span className="font-semibold">0.1%</span>
+              </p>
 
-            <p className="text-sm text-gray-500 mb-6">
-              Estimated fee: <span className="font-semibold">0.1%</span>
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 25px #ec4899" }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-pink-500 hover:bg-pink-400 text-white font-bold py-4 text-lg rounded-lg"
+              >
+                Send Money
+              </motion.button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Section 3 - How to Send Money */}
+        <section className="relative z-20 w-screen h-screen flex flex-col lg:flex-row items-center justify-center text-white px-6 lg:px-20">
+          {/* Left Content */}
+          <div className="lg:w-1/2 w-full space-y-6">
+            <h2 className="text-4xl font-bold text-pink-400">
+              How to send money internationally from Indonesia
+            </h2>
+            <p className="text-lg text-gray-300">
+              Open a free account today in minutes. Then set up your first
+              transfer in 3 easy steps.
             </p>
+
+            {/* Steps */}
+            <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
+              >
+                <h3 className="font-bold text-lg text-pink-400">
+                  1. Choose where the money's going
+                </h3>
+                <ul className="list-disc list-inside text-gray-300 mt-2">
+                  <li>
+                    Send to bank accounts around the world. Your recipient
+                    doesn't need Wise to receive money.
+                  </li>
+                  <li>
+                    If your recipient has Wise, you can look them up on our
+                    network and send to them in seconds.
+                  </li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
+              >
+                <h3 className="font-bold text-lg text-pink-400">
+                  2. Choose how much to send
+                </h3>
+                <p className="text-gray-300 mt-2">
+                  Enter the amount you want to send. Check out the fees — and
+                  see exactly how much you’ll get on the other side.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
+              >
+                <h3 className="font-bold text-lg text-pink-400">
+                  3. Choose how to pay
+                </h3>
+                <p className="text-gray-300 mt-2">
+                  Pay in Indonesian rupiah by bank transfer or using money
+                  already in your Wise account. Once we get the money, we’ll
+                  convert it and send it to your recipient.
+                </p>
+                <p className="text-gray-300">
+                  Depending on how you pay, this usually takes seconds.
+                </p>
+              </motion.div>
+            </div>
 
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 0 25px #ec4899" }}
               whileTap={{ scale: 0.95 }}
-              className="w-full bg-pink-500 hover:bg-pink-400 text-white font-bold py-4 text-lg rounded-lg"
+              className="mt-6 bg-pink-500 px-6 py-3 rounded-full font-bold text-white hover:bg-pink-400 transition"
             >
-              Send Money
+              Send money now
             </motion.button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 3 - How to Send Money */}
-      <section className="relative z-10 w-screen h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-b from-black via-purple-950 to-gray-900 text-white px-6 lg:px-20">
-        {/* Left Content */}
-        <div className="lg:w-1/2 w-full space-y-6">
-          <h2 className="text-4xl font-bold text-pink-400">
-            How to send money internationally from Indonesia
-          </h2>
-          <p className="text-lg text-gray-300">
-            Open a free account today in minutes. Then set up your first
-            transfer in 3 easy steps.
-          </p>
-
-          {/* Steps */}
-          <div className="space-y-4">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
-            >
-              <h3 className="font-bold text-lg text-pink-400">
-                1. Choose where the money's going
-              </h3>
-              <ul className="list-disc list-inside text-gray-300 mt-2">
-                <li>
-                  Send to bank accounts around the world. Your recipient doesn't
-                  need Wise to receive money.
-                </li>
-                <li>
-                  If your recipient has Wise, you can look them up on our
-                  network and send to them in seconds.
-                </li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
-            >
-              <h3 className="font-bold text-lg text-pink-400">
-                2. Choose how much to send
-              </h3>
-              <p className="text-gray-300 mt-2">
-                Enter the amount you want to send. Check out the fees — and see
-                exactly how much you’ll get on the other side.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-gray-900/60 rounded-2xl p-5 border border-pink-500 hover:bg-gray-800/60 transition"
-            >
-              <h3 className="font-bold text-lg text-pink-400">
-                3. Choose how to pay
-              </h3>
-              <p className="text-gray-300 mt-2">
-                Pay in Indonesian rupiah by bank transfer or using money already
-                in your Wise account. Once we get the money, we’ll convert it
-                and send it to your recipient.
-              </p>
-              <p className="text-gray-300">
-                Depending on how you pay, this usually takes seconds.
-              </p>
-            </motion.div>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 25px #ec4899" }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 bg-pink-500 px-6 py-3 rounded-full font-bold text-white hover:bg-pink-400 transition"
-          >
-            Send money now
-          </motion.button>
-        </div>
+          {/* Right Content */}
+          <div className="lg:w-1/2 w-full flex justify-center mt-10 lg:mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gray-900 rounded-3xl p-12 shadow-lg text-center border border-pink-500"
+            >
+              <div className="text-6xl mb-6">✅</div>
+              <h3 className="text-pink-400 font-bold text-2xl">
+                YOUR MONEY IS ON THE WAY
+              </h3>
+            </motion.div>
+          </div>
+        </section>
 
-        {/* Right Content */}
-        <div className="lg:w-1/2 w-full flex justify-center mt-10 lg:mt-0">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="bg-gray-900 rounded-3xl p-12 shadow-lg text-center border border-pink-500"
-          >
-            <div className="text-6xl mb-6">✅</div>
-            <h3 className="text-pink-400 font-bold text-2xl">
-              YOUR MONEY IS ON THE WAY
-            </h3>
-          </motion.div>
+        {/* Section 4 - Footer */}
+        <div className="relative z-20 bg-gradient-to-b from-gray-900 via-purple-950 to-black">
+          <footer className="w-full text-gray-300 px-6 md:px-20 py-16">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-700 pb-12">
+              {/* Brand & Description */}
+              <div>
+                <h2 className="text-2xl font-extrabold text-pink-400 mb-4">
+                  WEB3 BRAND
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  Empowering teams to build next-gen Web3 experiences — making
+                  blockchain simple, fast, and secure.
+                </p>
+                <div className="flex gap-4 text-xl">
+                  <a href="#">
+                    <i className="ri-twitter-x-fill hover:text-white transition"></i>
+                  </a>
+                  <a href="#">
+                    <i className="ri-instagram-line hover:text-white transition"></i>
+                  </a>
+                  <a href="#">
+                    <i className="ri-linkedin-box-fill hover:text-white transition"></i>
+                  </a>
+                  <a href="#">
+                    <i className="ri-github-fill hover:text-white transition"></i>
+                  </a>
+                </div>
+              </div>
+
+              {/* Product */}
+              <div>
+                <h3 className="text-lg font-bold text-purple-400 mb-4">
+                  Product
+                </h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Integrations
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Changelog
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Resources */}
+              <div>
+                <h3 className="text-lg font-bold text-purple-400 mb-4">
+                  Resources
+                </h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Documentation
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Tutorials
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Support
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Company */}
+              <div>
+                <h3 className="text-lg font-bold text-purple-400 mb-4">
+                  Company
+                </h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Careers
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Contact
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white transition">
+                      Partners
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom */}
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-6 text-sm text-gray-500 gap-4">
+              <p>
+                © {new Date().getFullYear()} WEB3 BRAND. All rights reserved.
+              </p>
+              <div className="flex gap-6">
+                <a href="#" className="hover:text-gray-300 transition">
+                  Privacy Policy
+                </a>
+                <a href="#" className="hover:text-gray-300 transition">
+                  Terms of Service
+                </a>
+                <a href="#" className="hover:text-gray-300 transition">
+                  Cookies Settings
+                </a>
+              </div>
+            </div>
+          </footer>
         </div>
-      </section>
+      </main>
     </div>
   );
 }

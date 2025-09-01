@@ -1,110 +1,156 @@
-// src/app/page.tsx
 "use client";
 
 import { motion } from "framer-motion";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import GlowingButton from "@/components/GlowingButton";
 
 export default function HomePage() {
-	// Custom Cursor State
-	const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-	const [cursorVariant, setCursorVariant] = useState("default");
+  return (
+    <div className="relative text-white overflow-hidden">
+      <Header />
 
-	useEffect(() => {
-		const moveCursor = (e: MouseEvent) => {
-			setCursorPos({ x: e.clientX, y: e.clientY });
-		};
-		window.addEventListener("mousemove", moveCursor);
-		return () => window.removeEventListener("mousemove", moveCursor);
-	}, []);
+      {/* Hero Section */}
+      <section className="relative h-screen flex flex-col justify-center items-center text-center px-8">
+        <h1 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          ExSeas
+        </h1>
+        <p className="text-lg text-gray-300 mt-6 max-w-2xl">
+          Dari wallet ke rekening dalam sekali jalan. Visual, simpel, tanpa
+          ribet.
+        </p>
 
-	const variants = {
-		default: {
-			x: cursorPos.x - 16,
-			y: cursorPos.y - 16,
-			transition: { type: "spring", mass: 0.5 },
-		},
-		hover: {
-			x: cursorPos.x - 32,
-			y: cursorPos.y - 32,
-			scale: 2,
-			backgroundColor: "#9333ea",
-			mixBlendMode: "difference" as const,
-		},
-	};
+        <div className="flex gap-6 mt-10 justify-center">
+          <Link href="/demo">
+            <GlowingButton>Coba Demo</GlowingButton>
+          </Link>
+        </div>
+      </section>
 
-	return (
-		<div className="relative min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-black text-white overflow-hidden">
-			{/* Custom Cursor */}
-			<motion.div
-				className="fixed top-0 left-0 w-8 h-8 rounded-full bg-purple-500 pointer-events-none z-50"
-				variants={variants}
-				animate={cursorVariant}
-			/>
+      {/* How It Works */}
+      <section className="py-24 bg-gray-950 text-center">
+        <h2 className="text-4xl font-bold text-pink-400 mb-12">
+          Bagaimana Cara Kerjanya?
+        </h2>
+        <div className="grid md:grid-cols-3 gap-12 px-6 max-w-6xl mx-auto">
+          {[
+            {
+              title: "1. Hubungkan Wallet",
+              desc: "Connect ke MetaMask untuk baca saldo USDT/USDC.",
+              border: "border-pink-500",
+            },
+            {
+              title: "2. Swap di DEX",
+              desc: "Swap stablecoin ke IDRX via Uniswap di KAIA Blockchain.",
+              border: "border-purple-500",
+            },
+            {
+              title: "3. Tarik ke Rekening",
+              desc: "Hasil swap IDRX langsung masuk rekening via API IDRX.",
+              border: "border-pink-500",
+            },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{
+                y: -8,
+                scale: 1.05,
+                boxShadow:
+                  "0 0 25px rgba(236,72,153,0.6), 0 0 50px rgba(168,85,247,0.4)",
+              }}
+              transition={{ type: "spring", stiffness: 250, damping: 20 }}
+              className={`bg-gray-900 rounded-2xl p-8 border ${item.border} cursor-pointer transition`}
+            >
+              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+              <p className="text-gray-300">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-			{/* Hero Section */}
-			<section className="flex flex-col items-center justify-center h-screen text-center space-y-6">
-				<motion.h1
-					className="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
-					initial={{ opacity: 0, y: -50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 1 }}
-					onMouseEnter={() => setCursorVariant("hover")}
-					onMouseLeave={() => setCursorVariant("default")}
-				>
-					Welcome to Web3 World
-				</motion.h1>
+      {/* Features */}
+      <section className="py-24 px-6 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center text-purple-400 mb-12">
+          Fitur Utama
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            {
+              icon: "🔗",
+              title: "Integrasi Wallet",
+              desc: "Langsung connect ke MetaMask.",
+            },
+            {
+              icon: "🔄",
+              title: "Swap Multi Stablecoin",
+              desc: "Pilih USDT, USDC, BUSD, dll.",
+            },
+            {
+              icon: "💳",
+              title: "Langsung ke Bank",
+              desc: "Withdraw via API IDRX.",
+            },
+            {
+              icon: "📊",
+              title: "Visual Flow Builder",
+              desc: "Drag & drop sederhana.",
+            },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{
+                y: -8,
+                scale: 1.05,
+                boxShadow:
+                  "0 0 25px rgba(168,85,247,0.6), 0 0 50px rgba(236,72,153,0.4)",
+              }}
+              transition={{ type: "spring", stiffness: 250, damping: 20 }}
+              className="bg-gray-900 p-6 rounded-2xl border border-gray-700 cursor-pointer transition"
+            >
+              <div className="text-2xl">
+                {item.icon} <b>{item.title}</b>
+              </div>
+              <p className="text-gray-400 mt-2">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-				<motion.p
-					className="text-lg text-gray-300 max-w-xl"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 0.5, duration: 1 }}
-				>
-					Connect your wallet and explore the future of decentralized apps with
-					RainbowKit, Wagmi, and Next.js.
-				</motion.p>
-
-				<motion.div
-					initial={{ scale: 0 }}
-					animate={{ scale: 1 }}
-					transition={{ delay: 1, type: "spring" }}
-					onMouseEnter={() => setCursorVariant("hover")}
-					onMouseLeave={() => setCursorVariant("default")}
-				>
-					<ConnectButton />
-				</motion.div>
-			</section>
-
-			{/* Features Section */}
-			<section className="grid md:grid-cols-3 gap-8 px-10 py-20">
-				{[
-					{
-						title: "Secure Wallets",
-						desc: "Connect safely with multiple wallets.",
-					},
-					{
-						title: "Fast Transactions",
-						desc: "Experience blazing fast Polygon network.",
-					},
-					{
-						title: "Web3 Ready",
-						desc: "Built with Next.js, Wagmi & RainbowKit.",
-					},
-				].map((feature, i) => (
-					<motion.div
-						key={i}
-						className="p-6 bg-gray-800 rounded-2xl shadow-xl hover:bg-purple-700 cursor-pointer transition-colors"
-						whileHover={{ scale: 1.05, rotate: 1 }}
-						whileTap={{ scale: 0.95 }}
-						onMouseEnter={() => setCursorVariant("hover")}
-						onMouseLeave={() => setCursorVariant("default")}
-					>
-						<h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
-						<p className="text-gray-300">{feature.desc}</p>
-					</motion.div>
-				))}
-			</section>
-		</div>
-	);
+      {/* FAQ */}
+      <section className="py-24 bg-gray-950 px-6">
+        <h2 className="text-4xl font-bold text-center text-pink-400 mb-12">
+          FAQ
+        </h2>
+        <div className="max-w-3xl mx-auto space-y-6">
+          {[
+            {
+              q: "Apakah perlu smart contract?",
+              a: "Tidak, cukup manual call wallet via MetaMask.",
+            },
+            { q: "Apakah langsung masuk rekening?", a: "Ya, via API IDRX." },
+            {
+              q: "Apakah semua stablecoin bisa?",
+              a: "Mulai dari USDT, bisa ditambah lain.",
+            },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{
+                y: -4,
+                scale: 1.03,
+                boxShadow:
+                  "0 0 15px rgba(236,72,153,0.4), 0 0 30px rgba(168,85,247,0.2)",
+              }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className="bg-gray-900 p-6 rounded-xl border border-gray-700 cursor-pointer transition"
+            >
+              <h3 className="font-bold text-lg">{item.q}</h3>
+              <p className="text-gray-300 mt-1">{item.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
 }

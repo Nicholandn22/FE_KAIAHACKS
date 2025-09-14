@@ -10,7 +10,7 @@ export default function DocsPage() {
         </h1>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4">🔗 MetaMask Integration</h2>
+          <h2 className="text-2xl font-bold mb-4"> MetaMask Integration</h2>
           <p className="text-gray-300">
             Gunakan MetaMask untuk connect wallet & baca saldo stablecoin.
           </p>
@@ -18,7 +18,7 @@ export default function DocsPage() {
 
         <section>
           <h2 className="text-2xl font-bold mb-4">
-            🔄 DEX Swap (Uniswap on KAIA)
+            DEX Swap (Uniswap on KAIA)
           </h2>
           <p className="text-gray-300">
             Swap USDT → IDRX menggunakan Uniswap di blockchain KAIA.
@@ -26,7 +26,7 @@ export default function DocsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4">💳 API IDRX</h2>
+          <h2 className="text-2xl font-bold mb-4"> API IDRX</h2>
           <p className="text-gray-300">
             Withdraw IDRX langsung ke rekening bank pengguna.
           </p>

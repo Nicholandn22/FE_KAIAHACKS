@@ -35,27 +35,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Right: Sign Up & Login */}
-        <div className="flex items-center gap-6">
-          {/* Sign Up */}
-          <Link
-            href="/signup"
-            className="text-gray-300 hover:text-white transition text-lg font-semibold"
-          >
-            Sign Up
-          </Link>
-
-          {/* Login */}
-          <Link href="/login">
-            <motion.button
-              whileHover={{ scale: 1.1, boxShadow: "0 0 20px #a855f7" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-pink-500 px-5 py-3 rounded-full text-white font-bold text-lg hover:bg-pink-400 transition-all"
-            >
-              Login
-            </motion.button>
-          </Link>
-        </div>
+        
       </div>
     </header>
   );

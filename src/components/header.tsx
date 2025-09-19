@@ -30,6 +30,9 @@ export default function Header() {
           <Link href="/about" className="hover:text-white transition">
             About
           </Link>
+          <Link href="/token" className="hover:text-white transition">
+            Token
+          </Link>
         </nav>
 
         {/* Right: Sign Up & Login */}

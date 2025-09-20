@@ -289,7 +289,7 @@ export default function SimpleSwapDemo() {
 				Demo Swap (Polygon Amoy Testnet)
 			</h2>
 			<p className="text-sm text-center mt-1">
-				Swap IDRX ↔ USDC — UI sederhana, rate 1:1
+				Simple swap IDRX ↔ USDC — UI, rate 1:1
 			</p>
 
 			<div className="mt-4 text-xs text-gray-300">
@@ -297,7 +297,7 @@ export default function SimpleSwapDemo() {
 			</div>
 
 			<div className="mt-4">
-				<label className="block text-sm font-medium mb-1">You send</label>
+				<label className="block text-sm font-medium mb-1">Send Amount</label>
 				<div className="flex gap-3 items-center">
 					<input
 						className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 focus:outline-none"
@@ -320,7 +320,7 @@ export default function SimpleSwapDemo() {
 			</div>
 
 			<div className="mt-4">
-				<label className="block text-sm font-medium mb-1">Recipient gets</label>
+				<label className="block text-sm font-medium mb-1">Estimated sent value</label>
 				<div className="flex gap-3 items-center">
 					<div className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2">
 						{estimatedOut}
@@ -357,7 +357,7 @@ export default function SimpleSwapDemo() {
         focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
 					>
 						<option className="bg-gray-900 text-white" value="">
-							Pilih Bank
+							Choose your bank
 						</option>
 						{banks.map((bank) => (
 							<option
@@ -375,7 +375,7 @@ export default function SimpleSwapDemo() {
 						className="bg-gray-900 border border-white/20 text-white px-2 py-2 rounded font-medium 
     hover:bg-gray-800 transition duration-200"
 					>
-						Cek
+						Verify Bank Account
 					</button>
 				</div>
 			</div>
@@ -394,7 +394,7 @@ export default function SimpleSwapDemo() {
 						)
 					}
 				>
-					Switch Direction
+					Switch
 				</button>
 				{account ? (
 					<button
@@ -442,8 +442,8 @@ export default function SimpleSwapDemo() {
 					Network: {network ? `${network.name} (${network.chainId})` : "-"}
 				</div>
 				<div className="mt-2">
-					UI paksa jaringan Polygon Amoy Testnet (80002). Jika MetaMask ada di
-					jaringan lain, otomatis akan diminta pindah.
+					The UI forces the Polygon Amoy Testnet (80002). If MetaMask is on another network, 
+					it will automatically be prompted to switch.
 				</div>
 			</div>
 

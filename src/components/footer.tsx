@@ -8,8 +8,8 @@ export default function Footer() {
         <div>
           <h2 className="text-xl font-extrabold text-pink-400 mb-4">ExSeas</h2>
           <p className="text-gray-400">
-            Swap stablecoin ke rupiah langsung ke rekening. Simpel, cepat, dan
-            aman.
+            Stablecoin swap directly to Indonesia Rupiah and straight to your bank account!
+            Simple, fast, and secure.
           </p>
         </div>
 

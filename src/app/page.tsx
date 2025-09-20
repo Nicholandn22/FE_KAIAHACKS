@@ -17,13 +17,13 @@ export default function HomePage() {
           ExSeas
         </h1>
         <p className="text-lg text-gray-300 mt-6 max-w-2xl">
-          Dari wallet ke rekening dalam sekali jalan. Visual, simpel, tanpa
-          ribet.
+          From digita wallet directly to bank account on one click. 
+          Visualize, Simple, Hassle free.
         </p>
 
         <div className="flex gap-6 mt-10 justify-center">
           <Link href="/demo">
-            <GlowingButton>Coba Demo</GlowingButton>
+            <GlowingButton>Try Now</GlowingButton>
           </Link>
         </div>
       </section>
@@ -31,23 +31,23 @@ export default function HomePage() {
       {/* How It Works */}
       <section className="py-24 bg-gray-950 text-center">
         <h2 className="text-4xl font-bold text-pink-400 mb-12">
-          Bagaimana Cara Kerjanya?
+          How it works?
         </h2>
         <div className="grid md:grid-cols-3 gap-12 px-6 max-w-6xl mx-auto">
           {[
             {
-              title: "1. Hubungkan Wallet",
-              desc: "Connect ke MetaMask untuk baca saldo USDT/USDC.",
+              title: "1. Connect to your wallet",
+              desc: "Connect to MetaMask wallet to see your USDT/USDC balance.",
               border: "border-pink-500",
             },
             {
-              title: "2. Swap di DEX",
-              desc: "Swap stablecoin ke IDRX via Uniswap di KAIA Blockchain.",
+              title: "2. Swap on DEX",
+              desc: "Swap stablecoin from IDRX via Uniswap on KAIA Blockchain.",
               border: "border-purple-500",
             },
             {
-              title: "3. Tarik ke Rekening",
-              desc: "Hasil swap IDRX langsung masuk rekening via API IDRX.",
+              title: "3. Withdraw staright to the bank account",
+              desc: "The swap result of the IDRX goes directly into the account via the IDRX API.",
               border: "border-pink-500",
             },
           ].map((item, idx) => (
@@ -78,23 +78,23 @@ export default function HomePage() {
           {[
             {
               icon: "🔗",
-              title: "Integrasi Wallet",
-              desc: "Langsung connect ke MetaMask.",
+              title: "Wallet Integration",
+              desc: "Directly connect to MetaMask.",
             },
             {
               icon: "🔄",
               title: "Swap Multi Stablecoin",
-              desc: "Pilih USDT, USDC, BUSD, dll.",
+              desc: "Name it! USDT, USDC, BUSD, etc.",
             },
             {
               icon: "💳",
-              title: "Langsung ke Bank",
-              desc: "Withdraw via API IDRX.",
+              title: "Directly to the Bank Account",
+              desc: "Withdraw your balance via API IDRX.",
             },
             {
               icon: "📊",
               title: "Visual Flow Builder",
-              desc: "Drag & drop sederhana.",
+              desc: "Drag & drop, As easy as that!.",
             },
           ].map((item, idx) => (
             <motion.div
@@ -125,13 +125,16 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto space-y-6">
           {[
             {
-              q: "Apakah perlu smart contract?",
-              a: "Tidak, cukup manual call wallet via MetaMask.",
+              q: "Is a smart contract required?",
+              a: "No, just a manual wallet call via MetaMask.",
             },
-            { q: "Apakah langsung masuk rekening?", a: "Ya, via API IDRX." },
             {
-              q: "Apakah semua stablecoin bisa?",
-              a: "Mulai dari USDT, bisa ditambah lain.",
+              q: "Does it go directly into the account?",
+              a: "Yes, via the IDRX API. Currently limited to Indonesia banks.",
+            },
+            {
+              q: "Are all stablecoins supported?",
+              a: "Starting with USDT, others will be updated.",
             },
           ].map((item, idx) => (
             <motion.div

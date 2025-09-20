@@ -51,6 +51,14 @@ export default function SimpleSwapDemo() {
 	const [isSwapping, setIsSwapping] = useState(false);
 	const [txHash, setTxHash] = useState("");
 
+	const banks = [
+		{ id: "bca", name: "BCA", logo: "/banks/bca.png" },
+		{ id: "bri", name: "BRI", logo: "/banks/bri.png" },
+		{ id: "mandiri", name: "Mandiri", logo: "/banks/mandiri.png" },
+		{ id: "bni", name: "BNI", logo: "/banks/bni.png" },
+		{ id: "cimb", name: "CIMB Niaga", logo: "/banks/cimb.png" },
+	];
+
 	const [notification, setNotification] = useState<{
 		type: "success" | "error";
 		message: string;
@@ -298,8 +306,15 @@ export default function SimpleSwapDemo() {
 						onChange={(e) => setInputAmount(e.target.value)}
 						inputMode="decimal"
 					/>
-					<div className="px-3 py-2 border border-white/20 rounded">
-						{direction === "IDRXtoUSDC" ? "IDRX" : "USDC"}
+					<div className="flex items-center gap-2 px-3 py-2 border border-white/20 rounded">
+						<img
+							src={
+								direction === "IDRXtoUSDC" ? "https://s2.coinmarketcap.com/static/img/coins/64x64/26732.png" : "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+							}
+							alt="token logo"
+							className="w-5 h-5"
+						/>
+						<span>{direction === "IDRXtoUSDC" ? "IDRX" : "USDC"}</span>
 					</div>
 				</div>
 			</div>
@@ -310,9 +325,58 @@ export default function SimpleSwapDemo() {
 					<div className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2">
 						{estimatedOut}
 					</div>
-					<div className="px-3 py-2 border border-white/20 rounded">
-						{direction === "IDRXtoUSDC" ? "USDC" : "IDRX"}
+					<div className="flex items-center gap-2 px-3 py-2 border border-white/20 rounded">
+						<img
+							src={
+								direction === "IDRXtoUSDC" ? "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png" : "https://s2.coinmarketcap.com/static/img/coins/64x64/26732.png"
+							}
+							alt="token logo"
+							className="w-5 h-5"
+						/>
+						<span>{direction === "IDRXtoUSDC" ? "USDC" : "IDRX"}</span>
 					</div>
+				</div>
+			</div>
+
+			<div className="mt-4">
+				<label className="block text-sm font-medium mb-1">
+					Recipient Bank Account
+				</label>
+				<div className="flex gap-3 items-center">
+					{/* Input nomor rekening */}
+					<input
+						type="text"
+						placeholder="No. Rekening"
+						className="flex-1 bg-transparent border border-white/30 rounded px-3 py-2 
+        text-white placeholder-white/50 focus:outline-none"
+					/>
+
+					{/* Dropdown bank dengan logo */}
+					<select
+						className="bg-gray-900 text-white border border-white/20 rounded px-3 py-2 
+        focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+					>
+						<option className="bg-gray-900 text-white" value="">
+							Pilih Bank
+						</option>
+						{banks.map((bank) => (
+							<option
+								key={bank.id}
+								value={bank.id}
+								className="bg-gray-900 text-white"
+							>
+								{bank.name}
+							</option>
+						))}
+					</select>
+
+					{/* Tombol cek rekening */}
+					<button
+						className="bg-gray-900 border border-white/20 text-white px-2 py-2 rounded font-medium 
+    hover:bg-gray-800 transition duration-200"
+					>
+						Cek
+					</button>
 				</div>
 			</div>
 
